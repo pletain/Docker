@@ -8,6 +8,8 @@ services:
   db:
     build: ./mysql //여기에 도커파일이 있다.
     restart: always
+	volumes: # 뒷 부분 주소가 컨테이너의 mysql 부분의 데이터가 저장되는 위치임!
+		- ./data:/var/lib/mysql
 
   adminer:
     image: adminer
