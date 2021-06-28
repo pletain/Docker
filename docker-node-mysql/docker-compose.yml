@@ -1,0 +1,25 @@
+# Use root/example as user/password credentials
+//세 개의 컨테이너를 띄울 것이다.
+
+version: '3.1'
+
+services:
+
+  db:
+    build: ./mysql //여기에 도커파일이 있다.
+    restart: always
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  # node 이미지를 지정
+  node:
+    build: ./node
+    restart: always
+    links:  #링크 옵션, 세 컨테이너가 띄어졌을 때, node는 MYSQL랑 연결 해줘야한다.
+        - db:db_url
+    ports:
+        - 3000:3000
